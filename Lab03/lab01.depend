@@ -4,18 +4,20 @@
 	<vector>
 	<string>
 
-1587316274 source:c:\users\Игорь\desktop\lab03\lab03\main.cpp
+1587323417 source:c:\users\Игорь\desktop\lab03\lab03\main.cpp
 	<iostream>
 	<vector>
 	<string>
 	"histogram.h"
 
-1587317158 c:\users\Игорь\desktop\lab03\lab03\histogram.h
+1587323721 c:\users\Игорь\desktop\lab03\lab03\histogram.h
 	<iostream>
 	<vector>
+	<string>
 
-1587317164 source:c:\users\Игорь\desktop\lab03\lab03\histogram.cpp
+1587406771 source:c:\users\Игорь\desktop\lab03\lab03\histogram.cpp
 	<iostream>
 	<vector>
+	<string>
 	"histogram.h"
 

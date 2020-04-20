@@ -106,6 +106,14 @@ svg_text(double left, double baseline, string text) {
      cout << "<text x='" << left << "' y='" << baseline << "'>" << text << "</text>";
 
 }
+double sred_visota(vector<size_t> bins, size_t bin_count)                // изменения к Д/З вариваент 7. Добавлена функция sred_visota
+{
+    double sred_visota;
+    for(int i=0; i < bin_count; i++){
+        sred_visota=sred_visota+bins[i];
+    }
+    return sred_visota/bin_count;
+}
 void
 show_histogram_svg(const vector<size_t>& bins, size_t bin_count) {
     const auto IMAGE_WIDTH = 400;
@@ -122,8 +130,17 @@ show_histogram_svg(const vector<size_t>& bins, size_t bin_count) {
         const double bin_width = BLOCK_WIDTH * bins[i];
         svg_text(TEXT_LEFT, top+TEXT_BASELINE, to_string(bins[i]));
         cout << endl;
-        svg_rect(TEXT_WIDTH, top, bin_width, BIN_HEIGHT, "green", "#0000CD");
-        cout << endl;
+        if (bins[i] > sred_visota(bins, bin_count))                                          // изменения к Д/З вариваент 7. добавлено if
+        {
+            svg_rect(TEXT_WIDTH, top, bin_width, BIN_HEIGHT, "black", "red");
+            cout << endl;
+        }
+        else
+        {
+            svg_rect(TEXT_WIDTH, top, bin_width, BIN_HEIGHT, "black", "green");
+            cout << endl;
+        }
+
         top+=BIN_HEIGHT;
     }
     svg_end();
