@@ -2,11 +2,11 @@
 #include <vector>
 #include <string>
 #include "histogram.h"
+#include "svg.h"
 
 using namespace std;
 
-int
-main()
+int main()
 {
     // ¬вод данных
     size_t number_count;
