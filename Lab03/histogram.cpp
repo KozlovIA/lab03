@@ -3,6 +3,10 @@
 #include <string>
 #include "histogram.h"
 #include <istream>
+#include <curl/curl.h>
+#include <sstream>
+#include <string>
+
 using namespace std;
 
 input read_input(istream& in, bool prompt) {
@@ -106,3 +110,34 @@ show_histogram_text(vector<size_t> bins, const vector<double> numbers, size_t nu
         cout << '\n';
     }
 }
+size_t
+write_data(void* items, size_t item_size, size_t item_count, void* ctx) {
+    size_t data_size = item_size * item_count;
+    stringstream* buffer = reinterpret_cast<stringstream*>(ctx);
+    buffer -> write(reinterpret_cast<const char*>(items), data_size);
+    return data_size;
+}
+input download(const string& address){
+
+    stringstream buffer;
+
+    CURL *curl = curl_easy_init();
+        if(curl)
+        {
+            CURLcode res;
+            curl_easy_setopt(curl, CURLOPT_URL, address);
+            curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
+            curl_easy_setopt(curl, CURLOPT_WRITEDATA, &buffer);
+            res = curl_easy_perform(curl);
+            if(res!=0)
+            {
+                string error = curl_easy_strerror(res);
+                cout << "ERROR: " << error;
+                exit(1);
+            }
+            curl_easy_cleanup(curl);
+        }
+    return read_input(buffer, false);
+}
+
+

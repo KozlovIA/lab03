@@ -9,36 +9,20 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-    curl_global_init(CURL_GLOBAL_ALL);
+    input inp;
+    //curl_global_init(CURL_GLOBAL_ALL);
     if(argc > 1)
     {
-        CURL *curl = curl_easy_init();
-        if(curl)
-        {
-            CURLcode res;
-            curl_easy_setopt(curl, CURLOPT_URL, argv[1]);
-            res = curl_easy_perform(curl);
-            cout << "res = " << res << '/n';
-            if(res!=0)
-            {
-                string error = curl_easy_strerror(res);
-                cout << "ERROR: " << error;
-                exit(1);
-            }
-            curl_easy_cleanup(curl);
-        }
-
-        for(int i=0; i < argc; i++)
-        {
-            cout << "argc[" << i << "]=" << argv[i] << '/n';
-        }
+        inp = download(argv[1]);
     }
-    // Ввод данных
-    const auto input = read_input(cin, true);
+    else
+    {
+        inp = read_input(cin, true);
+    }
     // Вывод данных
-    const auto bins = make_histogram(input);
+    const auto bins = make_histogram(inp);
    // show_histogram_text(bins, numbers, number_count, bin_count);
-    show_histogram_svg(bins, input);
+    show_histogram_svg(bins, inp);
 
     return 0;
 }
