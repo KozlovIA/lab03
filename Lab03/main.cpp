@@ -8,7 +8,7 @@ using namespace std;
 int main()
 {
     // Ввод данных
-    const auto input = read_input(cin);
+    const auto input = read_input(cin, true);
     // Вывод данных
     const auto bins = make_histogram(input);
    // show_histogram_text(bins, numbers, number_count, bin_count);

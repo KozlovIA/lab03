@@ -5,15 +5,23 @@
 #include <istream>
 using namespace std;
 
-input read_input(istream& in) {
+input read_input(istream& in, bool prompt) {
     input data;
-
-    cerr << "Enter number_count: ";
-    cerr << "Enter number_count: ";
+    if (prompt == true)
+    {
+       cerr << "Enter number_count: ";
+    }
     in >> data.number_count;
-    cerr << "Enter numbers: ";
+     if (prompt == true)
+    {
+        cerr << "Enter numbers: ";
+
+    }
     data.numbers = input_numbers(in, data.number_count);
-    cerr << "Enter column count: ";
+     if (prompt == true)
+    {
+        cerr << "Enter column count: ";
+    }
     in >> data.bin_count;
     return data;
 }
