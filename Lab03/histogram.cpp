@@ -2,8 +2,21 @@
 #include <vector>
 #include <string>
 #include "histogram.h"
+#include <istream>
 using namespace std;
 
+input read_input(istream& in) {
+    input data;
+
+    cerr << "Enter number_count: ";
+    cerr << "Enter number_count: ";
+    in >> data.number_count;
+    cerr << "Enter numbers: ";
+    data.numbers = input_numbers(in, data.number_count);
+    cerr << "Enter column count: ";
+    in >> data.bin_count;
+    return data;
+}
 void find_minmax(const vector<double>& numbers, size_t count, double& min, double& max) {
     min = numbers[0];
     max = numbers[0];
@@ -29,14 +42,14 @@ input_numbers(istream& in, size_t count) {
     return result;
 }
 vector<size_t>
-make_histogram(const vector<double> numbers, size_t number_count, size_t bin_count) {
+make_histogram(struct input data) {
     double min, max;
-    find_minmax(numbers, number_count, min, max);
-    vector<size_t> bins(bin_count);
-    for (int i = 0; i < number_count; i++)
+    find_minmax(data.numbers, data.number_count, min, max);
+    vector<size_t> bins(data.bin_count);
+    for (int i = 0; i < data.number_count; i++)
     {
-        size_t bin = (size_t)((numbers[i] - min) / (max - min) * bin_count);
-        if (bin == bin_count)
+        size_t bin = (size_t)((data.numbers[i] - min) / (max - min) * data.bin_count);
+        if (bin == data.bin_count)
         {
             bin--;
         }
